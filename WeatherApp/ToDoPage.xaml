@@ -1,0 +1,63 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Private.CoreLib"
+             x:Class="WeatherApp.ToDoPage"
+             Title="To-Do List">
+    <StackLayout Padding="20">
+        <!-- Header -->
+        <Label Text="To-Do List" 
+               FontSize="24" 
+               HorizontalOptions="Center" />
+
+        <!-- Task Entry -->
+        <Entry x:Name="TaskEntry" 
+               Placeholder="Enter your task" 
+               FontSize="18" />
+
+        <!-- Date Picker -->
+        <DatePicker x:Name="TaskDatePicker" 
+                    FontSize="18" 
+                    MinimumDate="{x:Static system:DateTime.Today}" />
+
+        <!-- Time Picker -->
+        <TimePicker x:Name="TaskTimePicker" 
+                    FontSize="18" 
+                    Format="HH:mm" />
+        <!-- 24h format -->
+
+        <!-- Add or Save Task Button -->
+        <Button x:Name="AddOrSaveButton"
+                Text="Add Task" 
+                FontSize="18" 
+                Clicked="OnAddOrSaveTaskClicked" />
+
+        <!-- Task List -->
+        <CollectionView x:Name="TaskListView" 
+                        Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" Orientation="Vertical">
+                        <!-- Task Details -->
+                        <Label Text="{Binding Task}" 
+                               FontSize="18" />
+                        <Label Text="{Binding DisplayTime}" 
+                               FontSize="14" 
+                               TextColor="Gray" />
+
+                        <!-- Action Buttons -->
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Button Text="Edit" 
+                                    FontSize="14" 
+                                    Clicked="OnEditTaskClicked" 
+                                    CommandParameter="{Binding .}" />
+                            <Button Text="Delete" 
+                                    FontSize="14" 
+                                    Clicked="OnDeleteTaskClicked" 
+                                    CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
